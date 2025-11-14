@@ -1,0 +1,7 @@
+{
+  "model_name": "all-MiniLM-L6-v2",
+  "total_chunks": 43473,
+  "embedding_dim": 384,
+  "created_at": "2025-11-14T06:16:49.463583",
+  "index_type": "IndexFlatIP (cosine similarity)"
+}

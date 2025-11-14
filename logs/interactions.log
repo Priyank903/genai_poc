@@ -1,0 +1,454 @@
+2025-11-11 23:17:20,472 | INFO     | genai_poc            | Database already has 26 patients
+2025-11-11 23:17:20,487 | INFO     | sentence_transformers.SentenceTransformer | Use pytorch device_name: cpu
+2025-11-11 23:17:20,488 | INFO     | sentence_transformers.SentenceTransformer | Load pretrained SentenceTransformer: all-MiniLM-L6-v2
+2025-11-11 23:17:25,076 | INFO     | genai_poc            | RAG store initialized successfully
+2025-11-11 23:17:25,081 | INFO     | sentence_transformers.SentenceTransformer | Use pytorch device_name: cpu
+2025-11-11 23:17:25,081 | INFO     | sentence_transformers.SentenceTransformer | Load pretrained SentenceTransformer: all-MiniLM-L6-v2
+2025-11-11 23:17:28,592 | INFO     | agents               | RAG store initialized
+2025-11-11 23:17:28,697 | INFO     | web_search           | WebSearchTool initialized
+2025-11-11 23:17:28,698 | INFO     | agents               | Web search tool initialized
+2025-11-11 23:17:28,707 | INFO     | genai_poc            | Multi-agent system initialized successfully
+2025-11-11 23:35:31,436 | INFO     | genai_poc            | Database already has 26 patients
+2025-11-11 23:35:31,451 | INFO     | sentence_transformers.SentenceTransformer | Use pytorch device_name: cpu
+2025-11-11 23:35:31,451 | INFO     | sentence_transformers.SentenceTransformer | Load pretrained SentenceTransformer: all-MiniLM-L6-v2
+2025-11-11 23:35:36,011 | INFO     | genai_poc            | RAG store initialized successfully
+2025-11-11 23:35:36,017 | INFO     | sentence_transformers.SentenceTransformer | Use pytorch device_name: cpu
+2025-11-11 23:35:36,018 | INFO     | sentence_transformers.SentenceTransformer | Load pretrained SentenceTransformer: all-MiniLM-L6-v2
+2025-11-11 23:35:39,027 | INFO     | agents               | RAG store initialized
+2025-11-11 23:35:39,095 | INFO     | web_search           | WebSearchTool initialized
+2025-11-11 23:35:39,095 | INFO     | agents               | Web search tool initialized
+2025-11-11 23:35:39,106 | INFO     | genai_poc            | Multi-agent system initialized successfully
+2025-11-11 23:36:17,814 | INFO     | genai_poc            | Chat request | Session: 228c7d37-8830-49e7-bac7-e962493d081f | Message: Sarah Johnson
+2025-11-11 23:36:17,815 | INFO     | genai_poc            | Invoking agent system | Current agent: receptionist
+2025-11-11 23:36:17,819 | INFO     | agents               | Receptionist Agent activated
+2025-11-11 23:36:18,902 | INFO     | httpx                | HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 429 Too Many Requests"
+2025-11-11 23:36:18,903 | INFO     | openai._base_client  | Retrying request to /chat/completions in 0.436622 seconds
+2025-11-11 23:36:20,024 | INFO     | httpx                | HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 429 Too Many Requests"
+2025-11-11 23:36:20,025 | INFO     | openai._base_client  | Retrying request to /chat/completions in 0.972918 seconds
+2025-11-11 23:36:21,772 | INFO     | httpx                | HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 429 Too Many Requests"
+2025-11-11 23:36:21,774 | ERROR    | genai_poc            | Error in chat endpoint: Error code: 429 - {'error': {'message': 'You exceeded your current quota, please check your plan and billing details. For more information on this error, read the docs: https://platform.openai.com/docs/guides/error-codes/api-errors.', 'type': 'insufficient_quota', 'param': None, 'code': 'insufficient_quota'}}
+Traceback (most recent call last):
+  File "C:\Users\prk91\Downloads\genai_poc\src\app.py", line 240, in chat
+    result_state = agent_app.invoke(state)
+  File "C:\Users\prk91\anaconda3\Lib\site-packages\langgraph\pregel\main.py", line 3050, in invoke
+    for chunk in self.stream(
+                 ~~~~~~~~~~~^
+        input,
+        ^^^^^^
+    ...<10 lines>...
+        **kwargs,
+        ^^^^^^^^^
+    ):
+    ^
+  File "C:\Users\prk91\anaconda3\Lib\site-packages\langgraph\pregel\main.py", line 2633, in stream
+    for _ in runner.tick(
+             ~~~~~~~~~~~^
+        [t for t in loop.tasks.values() if not t.writes],
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    ...<2 lines>...
+        schedule_task=loop.accept_push,
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    ):
+    ^
+  File "C:\Users\prk91\anaconda3\Lib\site-packages\langgraph\pregel\_runner.py", line 167, in tick
+    run_with_retry(
+    ~~~~~~~~~~~~~~^
+        t,
+        ^^
+    ...<10 lines>...
+        },
+        ^^
+    )
+    ^
+  File "C:\Users\prk91\anaconda3\Lib\site-packages\langgraph\pregel\_retry.py", line 42, in run_with_retry
+    return task.proc.invoke(task.input, config)
+           ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\prk91\anaconda3\Lib\site-packages\langgraph\_internal\_runnable.py", line 656, in invoke
+    input = context.run(step.invoke, input, config, **kwargs)
+  File "C:\Users\prk91\anaconda3\Lib\site-packages\langgraph\_internal\_runnable.py", line 400, in invoke
+    ret = self.func(*args, **kwargs)
+  File "C:\Users\prk91\Downloads\genai_poc\src\agents.py", line 285, in receptionist_agent
+    return call_model(state, "receptionist")
+  File "C:\Users\prk91\Downloads\genai_poc\src\agents.py", line 250, in call_model
+    response = llm_with_tools.invoke(llm_messages)
+  File "C:\Users\prk91\anaconda3\Lib\site-packages\langchain_core\runnables\base.py", line 5534, in invoke
+    return self.bound.invoke(
+           ~~~~~~~~~~~~~~~~~^
+        input,
+        ^^^^^^
+        self._merge_configs(config),
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+        **{**self.kwargs, **kwargs},
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "C:\Users\prk91\anaconda3\Lib\site-packages\langchain_core\language_models\chat_models.py", line 382, in invoke
+    self.generate_prompt(
+    ~~~~~~~~~~~~~~~~~~~~^
+        [self._convert_input(input)],
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    ...<6 lines>...
+        **kwargs,
+        ^^^^^^^^^
+    ).generations[0][0],
+    ^
+  File "C:\Users\prk91\anaconda3\Lib\site-packages\langchain_core\language_models\chat_models.py", line 1101, in generate_prompt
+    return self.generate(prompt_messages, stop=stop, callbacks=callbacks, **kwargs)
+           ~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\prk91\anaconda3\Lib\site-packages\langchain_core\language_models\chat_models.py", line 911, in generate
+    self._generate_with_cache(
+    ~~~~~~~~~~~~~~~~~~~~~~~~~^
+        m,
+        ^^
+    ...<2 lines>...
+        **kwargs,
+        ^^^^^^^^^
+    )
+    ^
+  File "C:\Users\prk91\anaconda3\Lib\site-packages\langchain_core\language_models\chat_models.py", line 1205, in _generate_with_cache
+    result = self._generate(
+        messages, stop=stop, run_manager=run_manager, **kwargs
+    )
+  File "C:\Users\prk91\anaconda3\Lib\site-packages\langchain_openai\chat_models\base.py", line 1299, in _generate
+    raise e
+  File "C:\Users\prk91\anaconda3\Lib\site-packages\langchain_openai\chat_models\base.py", line 1294, in _generate
+    raw_response = self.client.with_raw_response.create(**payload)
+  File "C:\Users\prk91\anaconda3\Lib\site-packages\openai\_legacy_response.py", line 364, in wrapped
+    return cast(LegacyAPIResponse[R], func(*args, **kwargs))
+                                      ~~~~^^^^^^^^^^^^^^^^^
+  File "C:\Users\prk91\anaconda3\Lib\site-packages\openai\_utils\_utils.py", line 286, in wrapper
+    return func(*args, **kwargs)
+  File "C:\Users\prk91\anaconda3\Lib\site-packages\openai\resources\chat\completions\completions.py", line 1156, in create
+    return self._post(
+           ~~~~~~~~~~^
+        "/chat/completions",
+        ^^^^^^^^^^^^^^^^^^^^
+    ...<46 lines>...
+        stream_cls=Stream[ChatCompletionChunk],
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "C:\Users\prk91\anaconda3\Lib\site-packages\openai\_base_client.py", line 1259, in post
+    return cast(ResponseT, self.request(cast_to, opts, stream=stream, stream_cls=stream_cls))
+                           ~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\prk91\anaconda3\Lib\site-packages\openai\_base_client.py", line 1047, in request
+    raise self._make_status_error_from_response(err.response) from None
+openai.RateLimitError: Error code: 429 - {'error': {'message': 'You exceeded your current quota, please check your plan and billing details. For more information on this error, read the docs: https://platform.openai.com/docs/guides/error-codes/api-errors.', 'type': 'insufficient_quota', 'param': None, 'code': 'insufficient_quota'}}
+During task with name 'receptionist' and id 'dbc9dc95-6485-dd95-a4bf-4c0078907b1f'
+2025-11-11 23:53:57,363 | INFO     | genai_poc            | Database already has 26 patients
+2025-11-11 23:53:57,444 | INFO     | sentence_transformers.SentenceTransformer | Use pytorch device_name: cpu
+2025-11-11 23:53:57,444 | INFO     | sentence_transformers.SentenceTransformer | Load pretrained SentenceTransformer: all-MiniLM-L6-v2
+2025-11-11 23:54:02,948 | INFO     | genai_poc            | RAG store initialized successfully
+2025-11-11 23:54:02,957 | INFO     | sentence_transformers.SentenceTransformer | Use pytorch device_name: cpu
+2025-11-11 23:54:02,958 | INFO     | sentence_transformers.SentenceTransformer | Load pretrained SentenceTransformer: all-MiniLM-L6-v2
+2025-11-11 23:54:06,441 | INFO     | agents               | RAG store initialized
+2025-11-11 23:54:06,463 | INFO     | web_search           | WebSearchTool initialized
+2025-11-11 23:54:06,463 | INFO     | agents               | Web search tool initialized
+2025-11-11 23:54:06,477 | INFO     | genai_poc            | Multi-agent system initialized successfully
+2025-11-11 23:54:31,717 | INFO     | genai_poc            | Database already has 26 patients
+2025-11-11 23:54:31,725 | INFO     | sentence_transformers.SentenceTransformer | Use pytorch device_name: cpu
+2025-11-11 23:54:31,725 | INFO     | sentence_transformers.SentenceTransformer | Load pretrained SentenceTransformer: all-MiniLM-L6-v2
+2025-11-11 23:54:36,978 | INFO     | genai_poc            | RAG store initialized successfully
+2025-11-11 23:54:36,986 | INFO     | sentence_transformers.SentenceTransformer | Use pytorch device_name: cpu
+2025-11-11 23:54:37,002 | INFO     | sentence_transformers.SentenceTransformer | Load pretrained SentenceTransformer: all-MiniLM-L6-v2
+2025-11-11 23:54:40,507 | INFO     | agents               | RAG store initialized
+2025-11-11 23:54:40,540 | INFO     | web_search           | WebSearchTool initialized
+2025-11-11 23:54:40,541 | INFO     | agents               | Web search tool initialized
+2025-11-11 23:54:40,554 | INFO     | genai_poc            | Multi-agent system initialized successfully
+2025-11-11 23:55:04,487 | INFO     | genai_poc            | Database already has 26 patients
+2025-11-11 23:55:04,495 | INFO     | sentence_transformers.SentenceTransformer | Use pytorch device_name: cpu
+2025-11-11 23:55:04,496 | INFO     | sentence_transformers.SentenceTransformer | Load pretrained SentenceTransformer: all-MiniLM-L6-v2
+2025-11-11 23:55:10,354 | INFO     | genai_poc            | RAG store initialized successfully
+2025-11-11 23:55:10,362 | INFO     | sentence_transformers.SentenceTransformer | Use pytorch device_name: cpu
+2025-11-11 23:55:10,363 | INFO     | sentence_transformers.SentenceTransformer | Load pretrained SentenceTransformer: all-MiniLM-L6-v2
+2025-11-11 23:55:14,043 | INFO     | agents               | RAG store initialized
+2025-11-11 23:55:14,072 | INFO     | web_search           | WebSearchTool initialized
+2025-11-11 23:55:14,072 | INFO     | agents               | Web search tool initialized
+2025-11-11 23:55:14,084 | INFO     | genai_poc            | Multi-agent system initialized successfully
+2025-11-12 00:01:58,389 | INFO     | genai_poc            | Database already has 26 patients
+2025-11-12 00:01:58,413 | INFO     | sentence_transformers.SentenceTransformer | Use pytorch device_name: cpu
+2025-11-12 00:01:58,414 | INFO     | sentence_transformers.SentenceTransformer | Load pretrained SentenceTransformer: all-MiniLM-L6-v2
+2025-11-12 00:02:03,248 | INFO     | genai_poc            | RAG store initialized successfully
+2025-11-12 00:02:03,258 | INFO     | sentence_transformers.SentenceTransformer | Use pytorch device_name: cpu
+2025-11-12 00:02:03,258 | INFO     | sentence_transformers.SentenceTransformer | Load pretrained SentenceTransformer: all-MiniLM-L6-v2
+2025-11-12 00:02:06,409 | INFO     | agents               | RAG store initialized
+2025-11-12 00:02:06,447 | INFO     | web_search           | WebSearchTool initialized
+2025-11-12 00:02:06,448 | INFO     | agents               | Web search tool initialized
+2025-11-12 00:02:06,458 | INFO     | genai_poc            | Multi-agent system initialized successfully
+2025-11-12 00:02:22,661 | INFO     | genai_poc            | Chat request | Session: bf310061-c35e-449e-963f-92128a7e9beb | Message: Sarah Johnson
+2025-11-12 00:02:22,662 | INFO     | genai_poc            | Invoking agent system | Current agent: receptionist
+2025-11-12 00:02:22,665 | INFO     | agents               | Receptionist Agent activated
+2025-11-12 00:02:27,135 | ERROR    | agents               | LLM invocation error: HTTPConnectionPool(host='localhost', port=11434): Max retries exceeded with url: /api/chat (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x0000023959AEDF90>: Failed to establish a new connection: [WinError 10061] No connection could be made because the target machine actively refused it'))
+2025-11-12 00:02:27,137 | INFO     | genai_poc            | INTERACTION | Session: bf310061-c35e-449e-963f-92128a7e9beb | Agent: receptionist | Patient: N/A | Message: Sarah Johnson
+2025-11-12 00:43:20,868 | INFO     | genai_poc            | Database already has 26 patients
+2025-11-12 00:43:20,884 | INFO     | sentence_transformers.SentenceTransformer | Use pytorch device_name: cpu
+2025-11-12 00:43:20,884 | INFO     | sentence_transformers.SentenceTransformer | Load pretrained SentenceTransformer: all-MiniLM-L6-v2
+2025-11-12 00:43:29,785 | INFO     | genai_poc            | RAG store initialized successfully
+2025-11-12 00:43:29,792 | INFO     | sentence_transformers.SentenceTransformer | Use pytorch device_name: cpu
+2025-11-12 00:43:29,792 | INFO     | sentence_transformers.SentenceTransformer | Load pretrained SentenceTransformer: all-MiniLM-L6-v2
+2025-11-12 00:43:34,162 | INFO     | agents               | RAG store initialized
+2025-11-12 00:43:34,191 | INFO     | web_search           | WebSearchTool initialized
+2025-11-12 00:43:34,192 | INFO     | agents               | Web search tool initialized
+2025-11-12 00:43:34,201 | INFO     | genai_poc            | Multi-agent system initialized successfully
+2025-11-12 00:44:39,895 | INFO     | genai_poc            | Chat request | Session: 2935067e-f12f-44fb-857e-cb07b572ba49 | Message: Sarah Johnson
+2025-11-12 00:44:39,906 | INFO     | genai_poc            | Invoking agent system | Current agent: receptionist
+2025-11-12 00:44:39,927 | INFO     | agents               | Receptionist Agent activated
+2025-11-12 00:44:39,941 | INFO     | genai_poc            | INTERACTION | Session: 2935067e-f12f-44fb-857e-cb07b572ba49 | Agent: receptionist | Patient: N/A | Message: Sarah Johnson
+2025-11-12 00:45:55,864 | INFO     | genai_poc            | Chat request | Session: 2935067e-f12f-44fb-857e-cb07b572ba49 | Message: Sarah Johnson
+2025-11-12 00:45:55,866 | INFO     | genai_poc            | Invoking agent system | Current agent: receptionist
+2025-11-12 00:45:55,874 | INFO     | agents               | Receptionist Agent activated
+2025-11-12 00:45:55,876 | INFO     | genai_poc            | INTERACTION | Session: 2935067e-f12f-44fb-857e-cb07b572ba49 | Agent: receptionist | Patient: N/A | Message: Sarah Johnson
+2025-11-12 00:52:01,663 | INFO     | genai_poc            | Database already has 26 patients
+2025-11-12 00:52:01,694 | INFO     | sentence_transformers.SentenceTransformer | Use pytorch device_name: cpu
+2025-11-12 00:52:01,695 | INFO     | sentence_transformers.SentenceTransformer | Load pretrained SentenceTransformer: all-MiniLM-L6-v2
+2025-11-12 00:52:08,015 | INFO     | genai_poc            | RAG store initialized successfully
+2025-11-12 00:52:08,024 | INFO     | sentence_transformers.SentenceTransformer | Use pytorch device_name: cpu
+2025-11-12 00:52:08,024 | INFO     | sentence_transformers.SentenceTransformer | Load pretrained SentenceTransformer: all-MiniLM-L6-v2
+2025-11-12 00:52:12,412 | INFO     | agents               | RAG store initialized
+2025-11-12 00:52:12,627 | INFO     | web_search           | WebSearchTool initialized
+2025-11-12 00:52:12,628 | INFO     | agents               | Web search tool initialized
+2025-11-12 00:52:12,639 | INFO     | genai_poc            | Multi-agent system initialized successfully
+2025-11-12 00:53:10,420 | INFO     | genai_poc            | Chat request | Session: 74b9729e-c6e1-406e-838a-1a573b4dca73 | Message: Sarah Johnson
+2025-11-12 00:53:10,428 | INFO     | genai_poc            | Invoking agent system | Current agent: receptionist
+2025-11-12 00:53:10,443 | INFO     | agents               | Receptionist Agent activated
+2025-11-12 00:53:10,443 | INFO     | agents               | Attempting to lookup patient: Sarah Johnson
+2025-11-12 00:53:10,458 | INFO     | db_utils             | DB lookup for name='Sarah Johnson' returned 1 rows
+2025-11-12 00:53:10,459 | INFO     | agents               | Found patient: Sarah Johnson
+2025-11-12 00:53:10,466 | INFO     | genai_poc            | INTERACTION | Session: 74b9729e-c6e1-406e-838a-1a573b4dca73 | Agent: receptionist | Patient: Sarah Johnson | Message: Sarah Johnson
+2025-11-12 00:54:52,629 | INFO     | genai_poc            | Chat request | Session: 74b9729e-c6e1-406e-838a-1a573b4dca73 | Message: what is the symptoms of Acute Kidney Injury (AKI) and what are the remedies?
+2025-11-12 00:54:52,629 | INFO     | genai_poc            | Invoking agent system | Current agent: receptionist
+2025-11-12 00:54:52,631 | INFO     | agents               | Receptionist Agent activated
+2025-11-12 00:54:52,632 | INFO     | genai_poc            | INTERACTION | Session: 74b9729e-c6e1-406e-838a-1a573b4dca73 | Agent: receptionist | Patient: Sarah Johnson | Message: what is the symptoms of Acute Kidney Injury (AKI) and what are the remedies?
+2025-11-12 00:55:19,625 | INFO     | genai_poc            | Chat request | Session: 74b9729e-c6e1-406e-838a-1a573b4dca73 | Message: Sarah Johnson
+2025-11-12 00:55:19,626 | INFO     | genai_poc            | Invoking agent system | Current agent: receptionist
+2025-11-12 00:55:19,627 | INFO     | agents               | Receptionist Agent activated
+2025-11-12 00:55:19,628 | INFO     | genai_poc            | INTERACTION | Session: 74b9729e-c6e1-406e-838a-1a573b4dca73 | Agent: receptionist | Patient: Sarah Johnson | Message: Sarah Johnson
+2025-11-12 00:55:41,662 | INFO     | genai_poc            | Chat request | Session: 74b9729e-c6e1-406e-838a-1a573b4dca73 | Message: Acute Kidney Injury (AKI) symptoms and remedies
+2025-11-12 00:55:41,663 | INFO     | genai_poc            | Invoking agent system | Current agent: receptionist
+2025-11-12 00:55:41,664 | INFO     | agents               | Receptionist Agent activated
+2025-11-12 00:55:41,665 | INFO     | genai_poc            | INTERACTION | Session: 74b9729e-c6e1-406e-838a-1a573b4dca73 | Agent: receptionist | Patient: Sarah Johnson | Message: Acute Kidney Injury (AKI) symptoms and remedies
+2025-11-12 00:59:20,027 | INFO     | genai_poc            | Database already has 26 patients
+2025-11-12 00:59:20,045 | INFO     | sentence_transformers.SentenceTransformer | Use pytorch device_name: cpu
+2025-11-12 00:59:20,046 | INFO     | sentence_transformers.SentenceTransformer | Load pretrained SentenceTransformer: all-MiniLM-L6-v2
+2025-11-12 01:03:51,074 | INFO     | genai_poc            | Database already has 26 patients
+2025-11-12 01:03:51,090 | INFO     | sentence_transformers.SentenceTransformer | Use pytorch device_name: cpu
+2025-11-12 01:03:51,090 | INFO     | sentence_transformers.SentenceTransformer | Load pretrained SentenceTransformer: all-MiniLM-L6-v2
+2025-11-12 01:03:55,942 | INFO     | genai_poc            | RAG store initialized successfully
+2025-11-12 01:03:55,948 | INFO     | sentence_transformers.SentenceTransformer | Use pytorch device_name: cpu
+2025-11-12 01:03:55,949 | INFO     | sentence_transformers.SentenceTransformer | Load pretrained SentenceTransformer: all-MiniLM-L6-v2
+2025-11-12 01:03:59,484 | INFO     | agents               | RAG store initialized
+2025-11-12 01:03:59,546 | INFO     | web_search           | WebSearchTool initialized
+2025-11-12 01:03:59,547 | INFO     | agents               | Web search tool initialized
+2025-11-12 01:03:59,558 | INFO     | genai_poc            | Multi-agent system initialized successfully
+2025-11-12 01:04:05,510 | INFO     | genai_poc            | Chat request | Session: ce4cd3b3-46b3-45f8-bb19-98403feee7ef | Message: Sarah Johnson
+2025-11-12 01:04:05,511 | INFO     | genai_poc            | Invoking agent system | Current agent: receptionist
+2025-11-12 01:04:05,513 | INFO     | agents               | Receptionist Agent activated
+2025-11-12 01:04:05,513 | INFO     | agents               | Attempting to lookup patient: Sarah Johnson
+2025-11-12 01:04:05,516 | INFO     | db_utils             | DB lookup for name='Sarah Johnson' returned 1 rows
+2025-11-12 01:04:05,516 | INFO     | agents               | Found patient: Sarah Johnson
+2025-11-12 01:04:05,518 | INFO     | genai_poc            | INTERACTION | Session: ce4cd3b3-46b3-45f8-bb19-98403feee7ef | Agent: receptionist | Patient: Sarah Johnson | Message: Sarah Johnson
+2025-11-12 01:05:41,405 | INFO     | genai_poc            | Chat request | Session: ce4cd3b3-46b3-45f8-bb19-98403feee7ef | Message: I'm having swelling in my legs. Should I be worried?
+2025-11-12 01:05:41,405 | INFO     | genai_poc            | Invoking agent system | Current agent: receptionist
+2025-11-12 01:05:41,406 | INFO     | agents               | Receptionist Agent activated
+2025-11-12 01:05:41,406 | INFO     | agents               | Receptionist detected medical question - routing to Clinical Agent
+2025-11-12 01:05:41,407 | INFO     | agents               | Clinical Agent activated
+2025-11-12 01:05:41,407 | INFO     | agents               | Clinical Agent: Using RAG to answer: I'm having swelling in my legs. Should I be worried?
+2025-11-12 01:05:41,687 | INFO     | genai_poc            | INTERACTION | Session: ce4cd3b3-46b3-45f8-bb19-98403feee7ef | Agent: clinical | Patient: Sarah Johnson | Message: I'm having swelling in my legs. Should I be worried?
+2025-11-12 01:06:23,498 | INFO     | genai_poc            | Chat request | Session: ce4cd3b3-46b3-45f8-bb19-98403feee7ef | Message: what is the capital of botswana
+2025-11-12 01:06:23,499 | INFO     | genai_poc            | Invoking agent system | Current agent: clinical
+2025-11-12 01:06:23,500 | INFO     | agents               | Receptionist Agent activated
+2025-11-12 01:06:23,500 | INFO     | genai_poc            | INTERACTION | Session: ce4cd3b3-46b3-45f8-bb19-98403feee7ef | Agent: receptionist | Patient: Sarah Johnson | Message: what is the capital of botswana
+2025-11-12 01:06:44,680 | INFO     | genai_poc            | Chat request | Session: ce4cd3b3-46b3-45f8-bb19-98403feee7ef | Message: Sarah Johnson
+2025-11-12 01:06:44,694 | INFO     | genai_poc            | Invoking agent system | Current agent: receptionist
+2025-11-12 01:06:44,697 | INFO     | agents               | Receptionist Agent activated
+2025-11-12 01:06:44,698 | INFO     | genai_poc            | INTERACTION | Session: ce4cd3b3-46b3-45f8-bb19-98403feee7ef | Agent: receptionist | Patient: Sarah Johnson | Message: Sarah Johnson
+2025-11-12 01:06:55,579 | INFO     | genai_poc            | Chat request | Session: ce4cd3b3-46b3-45f8-bb19-98403feee7ef | Message: Sarah Johnson
+2025-11-12 01:06:55,580 | INFO     | genai_poc            | Invoking agent system | Current agent: receptionist
+2025-11-12 01:06:55,599 | INFO     | agents               | Receptionist Agent activated
+2025-11-12 01:06:55,600 | INFO     | genai_poc            | INTERACTION | Session: ce4cd3b3-46b3-45f8-bb19-98403feee7ef | Agent: receptionist | Patient: Sarah Johnson | Message: Sarah Johnson
+2025-11-12 01:07:07,626 | INFO     | genai_poc            | Chat request | Session: 454d925a-27df-4a4e-9ab5-fa1d4ef85ea0 | Message: Sarah Johnson
+2025-11-12 01:07:07,626 | INFO     | genai_poc            | Invoking agent system | Current agent: receptionist
+2025-11-12 01:07:07,628 | INFO     | agents               | Receptionist Agent activated
+2025-11-12 01:07:07,630 | INFO     | agents               | Attempting to lookup patient: Sarah Johnson
+2025-11-12 01:07:07,637 | INFO     | db_utils             | DB lookup for name='Sarah Johnson' returned 1 rows
+2025-11-12 01:07:07,638 | INFO     | agents               | Found patient: Sarah Johnson
+2025-11-12 01:07:07,639 | INFO     | genai_poc            | INTERACTION | Session: 454d925a-27df-4a4e-9ab5-fa1d4ef85ea0 | Agent: receptionist | Patient: Sarah Johnson | Message: Sarah Johnson
+2025-11-12 01:07:22,525 | INFO     | genai_poc            | Chat request | Session: 454d925a-27df-4a4e-9ab5-fa1d4ef85ea0 | Message: what is the capital of botswana
+2025-11-12 01:07:22,526 | INFO     | genai_poc            | Invoking agent system | Current agent: receptionist
+2025-11-12 01:07:22,527 | INFO     | agents               | Receptionist Agent activated
+2025-11-12 01:07:22,527 | INFO     | genai_poc            | INTERACTION | Session: 454d925a-27df-4a4e-9ab5-fa1d4ef85ea0 | Agent: receptionist | Patient: Sarah Johnson | Message: what is the capital of botswana
+2025-11-12 02:02:03,977 | INFO     | genai_poc            | Database already has 26 patients
+2025-11-12 02:02:03,991 | INFO     | sentence_transformers.SentenceTransformer | Use pytorch device_name: cpu
+2025-11-12 02:02:03,991 | INFO     | sentence_transformers.SentenceTransformer | Load pretrained SentenceTransformer: all-MiniLM-L6-v2
+2025-11-12 02:02:08,472 | INFO     | genai_poc            | RAG store initialized successfully
+2025-11-12 02:02:08,477 | INFO     | sentence_transformers.SentenceTransformer | Use pytorch device_name: cpu
+2025-11-12 02:02:08,477 | INFO     | sentence_transformers.SentenceTransformer | Load pretrained SentenceTransformer: all-MiniLM-L6-v2
+2025-11-12 02:02:11,478 | INFO     | agents               | RAG store initialized
+2025-11-12 02:02:11,503 | INFO     | web_search           | WebSearchTool initialized
+2025-11-12 02:02:11,503 | INFO     | agents               | Web search tool initialized
+2025-11-12 02:02:11,510 | INFO     | genai_poc            | Multi-agent system initialized successfully
+2025-11-12 02:03:02,039 | INFO     | genai_poc            | Chat request | Session: 7f6311ba-22ab-455f-abdc-85688a6b1311 | Message: Sarah Johnson
+2025-11-12 02:03:02,040 | INFO     | genai_poc            | Invoking agent system | Current agent: receptionist
+2025-11-12 02:03:02,044 | INFO     | agents               | Receptionist Agent activated
+2025-11-12 02:03:02,044 | INFO     | agents               | Attempting to lookup patient: Sarah Johnson
+2025-11-12 02:03:02,048 | INFO     | db_utils             | DB lookup for name='Sarah Johnson' returned 1 rows
+2025-11-12 02:03:02,048 | INFO     | agents               | Found patient: Sarah Johnson
+2025-11-12 02:03:02,050 | INFO     | genai_poc            | INTERACTION | Session: 7f6311ba-22ab-455f-abdc-85688a6b1311 | Agent: receptionist | Patient: Sarah Johnson | Message: Sarah Johnson
+2025-11-12 02:03:11,370 | INFO     | genai_poc            | Chat request | Session: 7f6311ba-22ab-455f-abdc-85688a6b1311 | Message:     "text": "), is present in both \nthe CNT and the CD. There are at least two types of IC cells, d
+2025-11-12 02:03:11,370 | INFO     | genai_poc            | Invoking agent system | Current agent: receptionist
+2025-11-12 02:03:11,371 | INFO     | agents               | Receptionist Agent activated
+2025-11-12 02:03:11,372 | INFO     | agents               | Receptionist detected medical question - routing to Clinical Agent
+2025-11-12 02:03:11,373 | INFO     | agents               | Clinical Agent activated
+2025-11-12 02:03:11,373 | INFO     | agents               | Clinical Agent: Using RAG to answer:     "text": "), is present in both \nthe CNT and the CD. There are at least two types of IC cells, d
+2025-11-12 02:03:11,683 | INFO     | genai_poc            | INTERACTION | Session: 7f6311ba-22ab-455f-abdc-85688a6b1311 | Agent: clinical | Patient: Sarah Johnson | Message:     "text": "), is present in both \nthe CNT and the CD. There are at least two types of IC cells, d
+2025-11-12 02:05:46,970 | INFO     | genai_poc            | Chat request | Session: 7f6311ba-22ab-455f-abdc-85688a6b1311 | Message:     "text": "), is present in both \nthe CNT and the CD. There are at least two types of IC cells
+2025-11-12 02:05:46,970 | INFO     | genai_poc            | Invoking agent system | Current agent: clinical
+2025-11-12 02:05:46,971 | INFO     | agents               | Receptionist Agent activated
+2025-11-12 02:05:46,972 | INFO     | genai_poc            | INTERACTION | Session: 7f6311ba-22ab-455f-abdc-85688a6b1311 | Agent: receptionist | Patient: Sarah Johnson | Message:     "text": "), is present in both \nthe CNT and the CD. There are at least two types of IC cells
+2025-11-12 02:19:41,615 | INFO     | genai_poc            | Database already has 26 patients
+2025-11-12 02:19:41,686 | INFO     | sentence_transformers.SentenceTransformer | Use pytorch device_name: cpu
+2025-11-12 02:19:41,686 | INFO     | sentence_transformers.SentenceTransformer | Load pretrained SentenceTransformer: all-MiniLM-L6-v2
+2025-11-12 02:19:46,196 | INFO     | genai_poc            | RAG store initialized successfully
+2025-11-12 02:19:46,201 | INFO     | sentence_transformers.SentenceTransformer | Use pytorch device_name: cpu
+2025-11-12 02:19:46,202 | INFO     | sentence_transformers.SentenceTransformer | Load pretrained SentenceTransformer: all-MiniLM-L6-v2
+2025-11-12 02:19:49,559 | INFO     | agents               | RAG store initialized
+2025-11-12 02:19:49,585 | INFO     | web_search           | WebSearchTool initialized
+2025-11-12 02:19:49,586 | INFO     | agents               | Web search tool initialized
+2025-11-12 02:19:49,595 | INFO     | genai_poc            | Multi-agent system initialized successfully
+2025-11-12 02:20:07,491 | INFO     | genai_poc            | Database already has 26 patients
+2025-11-12 02:20:07,500 | INFO     | sentence_transformers.SentenceTransformer | Use pytorch device_name: cpu
+2025-11-12 02:20:07,500 | INFO     | sentence_transformers.SentenceTransformer | Load pretrained SentenceTransformer: all-MiniLM-L6-v2
+2025-11-12 02:20:25,823 | INFO     | genai_poc            | Database already has 26 patients
+2025-11-12 02:20:25,833 | INFO     | sentence_transformers.SentenceTransformer | Use pytorch device_name: cpu
+2025-11-12 02:20:25,833 | INFO     | sentence_transformers.SentenceTransformer | Load pretrained SentenceTransformer: all-MiniLM-L6-v2
+2025-11-12 02:20:30,967 | INFO     | genai_poc            | RAG store initialized successfully
+2025-11-12 02:20:30,987 | INFO     | sentence_transformers.SentenceTransformer | Use pytorch device_name: cpu
+2025-11-12 02:20:30,987 | INFO     | sentence_transformers.SentenceTransformer | Load pretrained SentenceTransformer: all-MiniLM-L6-v2
+2025-11-12 02:20:34,041 | INFO     | agents               | RAG store initialized
+2025-11-12 02:20:34,099 | INFO     | web_search           | WebSearchTool initialized
+2025-11-12 02:20:34,099 | INFO     | agents               | Web search tool initialized
+2025-11-12 02:20:34,110 | INFO     | genai_poc            | Multi-agent system initialized successfully
+2025-11-12 02:21:50,802 | INFO     | genai_poc            | Chat request | Session: 34d397b5-b358-4317-8f35-192761d6baec | Message: Sarah Johnson
+2025-11-12 02:21:50,803 | INFO     | genai_poc            | Invoking agent system | Current agent: receptionist
+2025-11-12 02:21:50,827 | INFO     | agents               | Receptionist Agent activated
+2025-11-12 02:21:50,828 | INFO     | agents               | Attempting to lookup patient: Sarah Johnson
+2025-11-12 02:21:50,840 | INFO     | db_utils             | DB lookup for name='Sarah Johnson' returned 1 rows
+2025-11-12 02:21:50,840 | INFO     | agents               | Found patient: Sarah Johnson
+2025-11-12 02:21:50,843 | INFO     | genai_poc            | INTERACTION | Session: 34d397b5-b358-4317-8f35-192761d6baec | Agent: receptionist | Patient: Sarah Johnson | Message: Sarah Johnson
+2025-11-12 02:22:37,484 | INFO     | genai_poc            | Chat request | Session: 34d397b5-b358-4317-8f35-192761d6baec | Message: is present in both \nthe CNT and the CD. There are at least two types of IC cells, designated \nA an
+2025-11-12 02:22:37,485 | INFO     | genai_poc            | Invoking agent system | Current agent: receptionist
+2025-11-12 02:22:37,486 | INFO     | agents               | Receptionist Agent activated
+2025-11-12 02:22:37,487 | INFO     | genai_poc            | INTERACTION | Session: 34d397b5-b358-4317-8f35-192761d6baec | Agent: receptionist | Patient: Sarah Johnson | Message: is present in both \nthe CNT and the CD. There are at least two types of IC cells, designated \nA an
+2025-11-12 02:22:49,412 | INFO     | genai_poc            | Chat request | Session: 34d397b5-b358-4317-8f35-192761d6baec | Message: is present in both \nthe CNT and the CD. There are at least two types of IC cells, designated \nA an
+2025-11-12 02:22:49,413 | INFO     | genai_poc            | Invoking agent system | Current agent: receptionist
+2025-11-12 02:22:49,414 | INFO     | agents               | Receptionist Agent activated
+2025-11-12 02:22:49,414 | INFO     | genai_poc            | INTERACTION | Session: 34d397b5-b358-4317-8f35-192761d6baec | Agent: receptionist | Patient: Sarah Johnson | Message: is present in both \nthe CNT and the CD. There are at least two types of IC cells, designated \nA an
+2025-11-12 02:36:16,640 | INFO     | genai_poc            | Database already has 26 patients
+2025-11-12 02:36:16,656 | INFO     | sentence_transformers.SentenceTransformer | Use pytorch device_name: cpu
+2025-11-12 02:36:16,656 | INFO     | sentence_transformers.SentenceTransformer | Load pretrained SentenceTransformer: all-MiniLM-L6-v2
+2025-11-12 02:36:20,986 | INFO     | genai_poc            | RAG store initialized successfully
+2025-11-12 02:36:20,992 | INFO     | sentence_transformers.SentenceTransformer | Use pytorch device_name: cpu
+2025-11-12 02:36:20,992 | INFO     | sentence_transformers.SentenceTransformer | Load pretrained SentenceTransformer: all-MiniLM-L6-v2
+2025-11-12 02:36:24,135 | INFO     | agents               | RAG store initialized
+2025-11-12 02:36:24,171 | INFO     | web_search           | WebSearchTool initialized
+2025-11-12 02:36:24,171 | INFO     | agents               | Web search tool initialized
+2025-11-12 02:36:24,190 | INFO     | genai_poc            | Multi-agent system initialized successfully
+2025-11-12 02:36:39,448 | INFO     | genai_poc            | Chat request | Session: 31cd9448-950d-4625-acb0-4fa29b78f42e | Message: Sarah Johnson
+2025-11-12 02:36:39,449 | INFO     | genai_poc            | Invoking agent system | Current agent: receptionist
+2025-11-12 02:36:39,451 | INFO     | agents               | Receptionist Agent activated
+2025-11-12 02:36:39,451 | INFO     | agents               | Attempting to lookup patient: Sarah Johnson
+2025-11-12 02:36:39,454 | INFO     | db_utils             | DB lookup for name='Sarah Johnson' returned 1 rows
+2025-11-12 02:36:39,454 | INFO     | agents               | Found patient: Sarah Johnson
+2025-11-12 02:36:39,456 | INFO     | genai_poc            | INTERACTION | Session: 31cd9448-950d-4625-acb0-4fa29b78f42e | Agent: receptionist | Patient: Sarah Johnson | Message: Sarah Johnson
+2025-11-12 02:37:24,203 | INFO     | genai_poc            | Chat request | Session: 31cd9448-950d-4625-acb0-4fa29b78f42e | Message:     "text": "), is present in both \nthe CNT and the CD. There are at least two types of IC cells, d
+2025-11-12 02:37:24,204 | INFO     | genai_poc            | Invoking agent system | Current agent: receptionist
+2025-11-12 02:37:24,205 | INFO     | agents               | Receptionist Agent activated
+2025-11-12 02:37:24,205 | INFO     | agents               | Receptionist detected medical question - routing to Clinical Agent
+2025-11-12 02:37:24,206 | INFO     | agents               | Clinical Agent activated
+2025-11-12 02:37:24,206 | INFO     | agents               | Clinical Agent: Retrieving RAG context for:     "text": "), is present in both \nthe CNT and the CD. There are at least two types of IC cells, d
+2025-11-12 02:37:24,504 | INFO     | agents               | Retrieved 5 documents from RAG
+2025-11-12 02:37:26,514 | INFO     | httpx                | HTTP Request: POST https://api.sarvam.ai/v1/chat/completions "HTTP/1.1 200 OK"
+2025-11-12 02:37:26,517 | INFO     | agents               | Clinical Agent response generated | Sources: reference | Citations: 5
+2025-11-12 02:37:26,518 | INFO     | genai_poc            | INTERACTION | Session: 31cd9448-950d-4625-acb0-4fa29b78f42e | Agent: clinical | Patient: Sarah Johnson | Message:     "text": "), is present in both \nthe CNT and the CD. There are at least two types of IC cells, d
+2025-11-12 02:38:24,981 | INFO     | genai_poc            | Chat request | Session: 31cd9448-950d-4625-acb0-4fa29b78f42e | Message: what is Acute Kidney Injury (AKI). symproms and when are the future signs to keep in mind
+2025-11-12 02:38:24,981 | INFO     | genai_poc            | Invoking agent system | Current agent: clinical
+2025-11-12 02:38:24,982 | INFO     | agents               | Receptionist Agent activated
+2025-11-12 02:38:24,983 | INFO     | agents               | Receptionist detected medical question - routing to Clinical Agent
+2025-11-12 02:38:24,983 | INFO     | agents               | Clinical Agent activated
+2025-11-12 02:38:24,983 | INFO     | agents               | Clinical Agent: Retrieving RAG context for: what is Acute Kidney Injury (AKI). symproms and when are the future signs to keep in mind
+2025-11-12 02:38:25,006 | INFO     | agents               | Retrieved 5 documents from RAG
+2025-11-12 02:38:28,297 | INFO     | httpx                | HTTP Request: POST https://api.sarvam.ai/v1/chat/completions "HTTP/1.1 200 OK"
+2025-11-12 02:38:28,298 | INFO     | agents               | Clinical Agent response generated | Sources: reference | Citations: 5
+2025-11-12 02:38:28,299 | INFO     | genai_poc            | INTERACTION | Session: 31cd9448-950d-4625-acb0-4fa29b78f42e | Agent: clinical | Patient: Sarah Johnson | Message: what is Acute Kidney Injury (AKI). symproms and when are the future signs to keep in mind
+2025-11-12 02:38:53,711 | INFO     | genai_poc            | Chat request | Session: 31cd9448-950d-4625-acb0-4fa29b78f42e | Message: what is the capital of india
+2025-11-12 02:38:53,711 | INFO     | genai_poc            | Invoking agent system | Current agent: clinical
+2025-11-12 02:38:53,712 | INFO     | agents               | Receptionist Agent activated
+2025-11-12 02:38:54,264 | INFO     | httpx                | HTTP Request: POST https://api.sarvam.ai/v1/chat/completions "HTTP/1.1 200 OK"
+2025-11-12 02:38:54,266 | INFO     | genai_poc            | INTERACTION | Session: 31cd9448-950d-4625-acb0-4fa29b78f42e | Agent: receptionist | Patient: Sarah Johnson | Message: what is the capital of india
+2025-11-12 03:04:18,021 | INFO     | genai_poc            | Database already has 26 patients
+2025-11-12 03:04:18,040 | INFO     | sentence_transformers.SentenceTransformer | Use pytorch device_name: cpu
+2025-11-12 03:04:18,040 | INFO     | sentence_transformers.SentenceTransformer | Load pretrained SentenceTransformer: all-MiniLM-L6-v2
+2025-11-12 03:04:23,359 | INFO     | genai_poc            | RAG store initialized successfully
+2025-11-12 03:04:23,368 | INFO     | sentence_transformers.SentenceTransformer | Use pytorch device_name: cpu
+2025-11-12 03:04:23,369 | INFO     | sentence_transformers.SentenceTransformer | Load pretrained SentenceTransformer: all-MiniLM-L6-v2
+2025-11-12 03:04:27,054 | INFO     | agents               | RAG store initialized
+2025-11-12 03:04:27,102 | INFO     | web_search           | WebSearchTool initialized
+2025-11-12 03:04:27,103 | INFO     | agents               | Web search tool initialized
+2025-11-12 03:04:27,117 | INFO     | genai_poc            | Multi-agent system initialized successfully
+2025-11-12 03:04:48,157 | INFO     | genai_poc            | Database already has 26 patients
+2025-11-12 03:04:48,165 | INFO     | sentence_transformers.SentenceTransformer | Use pytorch device_name: cpu
+2025-11-12 03:04:48,165 | INFO     | sentence_transformers.SentenceTransformer | Load pretrained SentenceTransformer: all-MiniLM-L6-v2
+2025-11-12 03:04:53,596 | INFO     | genai_poc            | RAG store initialized successfully
+2025-11-12 03:04:53,605 | INFO     | sentence_transformers.SentenceTransformer | Use pytorch device_name: cpu
+2025-11-12 03:04:53,606 | INFO     | sentence_transformers.SentenceTransformer | Load pretrained SentenceTransformer: all-MiniLM-L6-v2
+2025-11-12 03:04:57,042 | INFO     | agents               | RAG store initialized
+2025-11-12 03:04:57,068 | INFO     | web_search           | WebSearchTool initialized
+2025-11-12 03:04:57,069 | INFO     | agents               | Web search tool initialized
+2025-11-12 03:04:57,082 | INFO     | genai_poc            | Multi-agent system initialized successfully
+2025-11-12 03:10:06,749 | INFO     | genai_poc            | Database already has 26 patients
+2025-11-12 03:10:06,771 | INFO     | sentence_transformers.SentenceTransformer | Use pytorch device_name: cpu
+2025-11-12 03:10:06,771 | INFO     | sentence_transformers.SentenceTransformer | Load pretrained SentenceTransformer: all-MiniLM-L6-v2
+2025-11-12 03:10:12,153 | INFO     | genai_poc            | RAG store initialized successfully
+2025-11-12 03:10:12,162 | INFO     | sentence_transformers.SentenceTransformer | Use pytorch device_name: cpu
+2025-11-12 03:10:12,163 | INFO     | sentence_transformers.SentenceTransformer | Load pretrained SentenceTransformer: all-MiniLM-L6-v2
+2025-11-12 03:10:15,840 | INFO     | agents               | RAG store initialized
+2025-11-12 03:10:15,871 | INFO     | web_search           | WebSearchTool initialized
+2025-11-12 03:10:15,871 | INFO     | agents               | Web search tool initialized
+2025-11-12 03:10:15,885 | INFO     | genai_poc            | Multi-agent system initialized successfully
+2025-11-12 03:15:13,133 | INFO     | genai_poc            | Database already has 26 patients
+2025-11-12 03:15:13,141 | INFO     | sentence_transformers.SentenceTransformer | Use pytorch device_name: cpu
+2025-11-12 03:15:13,141 | INFO     | sentence_transformers.SentenceTransformer | Load pretrained SentenceTransformer: all-MiniLM-L6-v2
+2025-11-12 03:15:17,725 | INFO     | genai_poc            | RAG store initialized successfully
+2025-11-12 03:15:17,733 | INFO     | sentence_transformers.SentenceTransformer | Use pytorch device_name: cpu
+2025-11-12 03:15:17,734 | INFO     | sentence_transformers.SentenceTransformer | Load pretrained SentenceTransformer: all-MiniLM-L6-v2
+2025-11-12 03:15:21,820 | INFO     | agents               | RAG store initialized
+2025-11-12 03:15:21,844 | INFO     | web_search           | WebSearchTool initialized
+2025-11-12 03:15:21,845 | INFO     | agents               | Web search tool initialized
+2025-11-12 03:15:21,856 | INFO     | genai_poc            | Multi-agent system initialized successfully
+2025-11-12 03:15:42,591 | INFO     | genai_poc            | Database already has 26 patients
+2025-11-12 03:15:42,602 | INFO     | sentence_transformers.SentenceTransformer | Use pytorch device_name: cpu
+2025-11-12 03:15:42,603 | INFO     | sentence_transformers.SentenceTransformer | Load pretrained SentenceTransformer: all-MiniLM-L6-v2
+2025-11-12 03:15:48,548 | INFO     | genai_poc            | RAG store initialized successfully
+2025-11-12 03:15:48,556 | INFO     | sentence_transformers.SentenceTransformer | Use pytorch device_name: cpu
+2025-11-12 03:15:48,557 | INFO     | sentence_transformers.SentenceTransformer | Load pretrained SentenceTransformer: all-MiniLM-L6-v2
+2025-11-12 03:15:51,822 | INFO     | agents               | RAG store initialized
+2025-11-12 03:15:51,834 | INFO     | web_search           | WebSearchTool initialized
+2025-11-12 03:15:51,835 | INFO     | agents               | Web search tool initialized
+2025-11-12 03:15:51,846 | INFO     | genai_poc            | Multi-agent system initialized successfully
+2025-11-12 03:24:40,646 | INFO     | genai_poc            | Chat request | Session: 41afe2a1-2108-4866-a9d3-c30920333ff3 | Message: Sarah Johnson
+2025-11-12 03:24:40,646 | INFO     | genai_poc            | Invoking agent system | Current agent: receptionist
+2025-11-12 03:24:40,650 | INFO     | agents               | Receptionist Agent activated
+2025-11-12 03:24:40,651 | INFO     | agents               | Attempting to lookup patient: Sarah Johnson
+2025-11-12 03:24:40,654 | INFO     | db_utils             | DB lookup for name='Sarah Johnson' returned 1 rows
+2025-11-12 03:24:40,654 | INFO     | agents               | Found patient: Sarah Johnson
+2025-11-12 03:24:40,656 | INFO     | genai_poc            | INTERACTION | Session: 41afe2a1-2108-4866-a9d3-c30920333ff3 | Agent: receptionist | Patient: Sarah Johnson | Message: Sarah Johnson
+2025-11-12 03:25:02,683 | INFO     | genai_poc            | Chat request | Session: 41afe2a1-2108-4866-a9d3-c30920333ff3 | Message: symptoms of  Acute Kidney Injury (AKI) 
+2025-11-12 03:25:02,684 | INFO     | genai_poc            | Invoking agent system | Current agent: receptionist
+2025-11-12 03:25:02,686 | INFO     | agents               | Receptionist Agent activated
+2025-11-12 03:25:02,686 | INFO     | agents               | Receptionist detected medical question - routing to Clinical Agent
+2025-11-12 03:25:02,686 | INFO     | agents               | Clinical Agent activated
+2025-11-12 03:25:02,687 | INFO     | agents               | Clinical Agent: Retrieving RAG context for: symptoms of  Acute Kidney Injury (AKI) 
+2025-11-12 03:25:02,990 | INFO     | agents               | Retrieved 5 documents from RAG
+2025-11-12 03:25:04,806 | INFO     | httpx                | HTTP Request: POST https://api.sarvam.ai/v1/chat/completions "HTTP/1.1 200 OK"
+2025-11-12 03:25:04,811 | INFO     | agents               | Clinical Agent response generated | Sources: reference | Citations: 5
+2025-11-12 03:25:04,812 | INFO     | genai_poc            | INTERACTION | Session: 41afe2a1-2108-4866-a9d3-c30920333ff3 | Agent: clinical | Patient: Sarah Johnson | Message: symptoms of  Acute Kidney Injury (AKI) 
