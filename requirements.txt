@@ -1,0 +1,31 @@
+# Core Framework
+fastapi
+uvicorn[standard]
+streamlit
+pydantic
+
+# AI/ML Libraries
+sentence-transformers
+faiss-cpu
+transformers
+torch
+accelerate
+numpy
+
+# RAG & LLM Integration
+langgraph
+langchain
+langchain-community
+sarvamai
+
+# Data Processing
+PyPDF2
+python-dotenv
+requests
+
+# Web Search
+duckduckgo-search
+
+# Utilities
+tqdm
+python-multipart
